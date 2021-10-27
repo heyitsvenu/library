@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Library</title>
+  </head>
+  <body>
+    <div id="main">
+      <div id="container">
+        <h1>Book Library</h1>
+        <!-- Trigger Modal -->
+        <button id="myBtn">Add Book</button>
+      </div>
+    </div>
+
+    <div id="bookGrid">
+      <!-- <div class="book">
+        <p>Title: Harry Potter</p>
+        <p>Author: JK Rowling</p>
+        <p>Num of Pages: 340</p>
+        <p>Read: <span class="isRead">Yes</span></p>
+        <span class="delete">&times;</span>
+      </div> -->
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <form>
+          <div>
+            <h2>Add Book</h2>
+          </div>
+          <div>
+            <label for="title">Book Title: </label>
+            <input type="text" id="title" required />
+          </div>
+          <div>
+            <label for="author">Author Name: </label>
+            <input type="text" id="author" required />
+          </div>
+          <div>
+            <label for="pages">Number of Pages: </label>
+            <input type="text" id="pages" required />
+          </div>
+          <div id="checkbox">
+            <label for="readStatus">Read or Not: </label>
+            <input type="checkbox" id="readStatus" />
+          </div>
+
+          <div>
+            <button id="submit">Submit</button>
+            <button id="close">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
