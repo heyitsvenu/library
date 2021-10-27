@@ -16,20 +16,19 @@ function Book(title, author, pages, readStatus) {
 }
 
 function Library() {
-  this.library = [
-    {
-      title: "Harry Potter",
-      author: "JK Rowling",
-      pages: "340",
-      readStatus: true,
-    },
-  ];
+  this.library = [];
 
   this.addBookToLibrary = function (book) {
-    if (this.library.some((element) => element.title == book.title)) {
+    let ls = JSON.parse(localStorage.getItem("myLibrary"));
+    if (
+      this.library.some((element) => element.title == book.title) ||
+      ls.some((element) => element.title == book.title)
+    ) {
       alert("this book already exists");
     } else {
       this.library.push(book);
+      // ls = JSON.parse(localStorage.getItem("myLibrary"));
+      localStorage.setItem("myLibrary", JSON.stringify(this.library));
       ui.paint(this.library);
       alert("Book Added");
     }
@@ -37,17 +36,29 @@ function Library() {
 
   this.removeBookFromLibrary = function (index) {
     let removed = this.library.splice(index, 1);
+    localStorage.setItem("myLibrary", JSON.stringify(this.library));
     ui.paint(this.library);
     alert(`Book ${removed[0].title} removed`);
   };
 
   this.changeReadStatus = function (index) {
     this.library[index].readStatus = !this.library[index].readStatus;
+    localStorage.setItem("myLibrary", JSON.stringify(this.library));
     ui.paint(this.library);
   };
 }
 
 const myLibrary = new Library();
+
+window.addEventListener("DOMContentLoaded", function () {
+  let ls = JSON.parse(localStorage.getItem("myLibrary"));
+  if (ls === null) {
+    localStorage.setItem("myLibrary", JSON.stringify([]));
+    ls = JSON.parse(localStorage.getItem("myLibrary"));
+  }
+  myLibrary.library = ls;
+  ui.paint(myLibrary.library);
+});
 
 submit.addEventListener("click", function (e) {
   e.preventDefault();
@@ -73,8 +84,4 @@ bookGrid.addEventListener("click", function (e) {
     let index = e.target.parentElement.parentElement.getAttribute("data-index");
     myLibrary.changeReadStatus(index);
   }
-});
-
-window.addEventListener("DOMContentLoaded", function () {
-  ui.paint(myLibrary.library);
 });
